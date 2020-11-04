@@ -1,0 +1,494 @@
+<odoo>
+  <data>
+    <!-- Student Personal Information -->
+    <!-- LIST Assets -->
+    <record model="ir.ui.view" id="student_list">
+      <field name="name">Student list</field>
+      <field name="model">student.student</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          
+        </tree>
+      </field>
+    </record>
+    <!--FORM-->
+    <record id="view_student_form" model="ir.ui.view">
+        <field name="name">student.form</field>
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+            <form string="Units">
+                <sheet>
+                    <group >
+                        <field name="name"/>
+                        <field name="race"/>
+                        <field name="religion"/>
+                        <field name="gender"/>
+                        <field name="birthdate"/>
+                        <field name="identification_number"/>
+                        <field name="chinese_name"/>
+                        <field name="mobile_phone"/>
+                        <field name="email"/>
+                        <field name="address"/>
+                        <field name="country"/>
+                        <field name="photo"/>
+                        <group>
+                          <label for="status" string="Status"/>
+                          <div class="o_row">
+                              <field name="status"/>
+                              <label for="status" string="InActive" attrs="{'invisible': [('status','=',True)]}"/>
+                              <label for="status" string="Active" attrs="{'invisible': [('status','!=',True)]}"/>
+                          </div>
+                          </group>
+                    </group>
+                    <footer>
+                        <div class="o_form_buttons_edit oe_edit_only" role="toolbar" aria-label="Main actions">
+                            <button type="button" class="btn btn-primary o_form_button_save" >
+                                Save
+                            </button>
+                            <button type="button"
+                                    class="btn btn-secondary o_form_button_cancel" accesskey="j">
+                                Discard
+                            </button>
+                        </div>
+                    </footer>
+                </sheet>
+                
+            </form>
+        </field>
+    </record>
+    <!-- Action-->
+    <record model="ir.actions.act_window" id="student.action_window_student">
+      <field name="name">Student</field>
+      <field name="res_model">student.student</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <!-- END Room ASSETS-->
+    <!-- School -->
+    <!-- Action-->
+    <record model="ir.actions.act_window" id="student.action_window_school">
+      <field name="name">School</field>
+      <field name="res_model">student.school</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <!--FORM-->
+    <record id="view_school_form" model="ir.ui.view">
+        <field name="name">school.form</field>
+        <field name="model">student.school</field>
+        <field name="arch" type="xml">
+            <form string="Units">
+                <sheet>
+                    <group >
+                        <field name="name"/>
+                        <field name="address"/>
+                    </group>
+                    <footer>
+                        <div class="o_form_buttons_edit oe_edit_only" role="toolbar" aria-label="Main actions">
+                            <button type="button" class="btn btn-primary o_form_button_save" >
+                                Save
+                            </button>
+                            <button type="button"
+                                    class="btn btn-secondary o_form_button_cancel" accesskey="j">
+                                Discard
+                            </button>
+                        </div>
+                    </footer>
+                </sheet>
+                
+            </form>
+        </field>
+    </record>
+    <!-- School -->
+    <!-- Student School -->
+    <!-- FORM -->
+    <record id="view_student_school_form" model="ir.ui.view">
+            <field name="name">student.student.schools.form</field>
+            <field name="model">student.student.schools</field>
+            <field name="arch" type="xml">
+                <form string="Bank account">
+                    <group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="school_name" />
+                            <field name="type"/>
+                            <field name="highest"/>
+                            <field name="class_number" />
+                            <field name="form_teacher"/>
+                            <field name="contact_number" />
+                            <field name="class_number" />
+                            <field name="qualification_type" />
+                            <field name="honors" />
+                            <field name="start_date" />
+                            <field name="end_date" />
+                            <field name="remarks" />
+                        </group>
+                        <footer>
+                          <div class="o_form_buttons_edit oe_edit_only" role="toolbar" aria-label="Main actions">
+                              <button type="button" class="btn btn-primary o_form_button_save" >
+                                  Save
+                              </button>
+                              <button type="button"
+                                      class="btn btn-secondary o_form_button_cancel" accesskey="j">
+                                  Discard
+                              </button>
+                          </div>
+                      </footer>
+                    </group>
+                </form>
+            </field>
+        </record>
+    <!-- ACTION-->
+    <record id="action_student_school" model="ir.actions.act_window">
+            <field name="name">Student School</field>
+            <field name="res_model">student.student.schools</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a Education
+              </p>
+            </field>
+        </record>
+
+
+    <!-- Student Tenancy -->
+    <!-- FORM -->
+    <record id="view_student_tenancy_form" model="ir.ui.view">
+            <field name="name">student.tenancy.form</field>
+            <field name="model">student.tenancy</field>
+            <field name="arch" type="xml">
+                <form string="Student Tenancy Form">
+                    <sheet>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="building_id" />
+                            <field name="units_id" />
+                            <field name="room_id" />
+                            <field name="checkin" />
+                            <field name="checkout" />
+                            <field name="termofpayment" />
+                            <field name="boarding_type" />
+                            <field name="boarding_cost" />
+                            <field name="deposit_amount" />
+                        </group>
+                        <footer>
+                          <div class="o_form_buttons_edit oe_edit_only" role="toolbar" aria-label="Main actions">
+                              <button type="button" class="btn btn-primary o_form_button_save" >
+                                  Save
+                              </button>
+                              <button type="button"
+                                      class="btn btn-secondary o_form_button_cancel" accesskey="j">
+                                  Discard
+                              </button>
+                          </div>
+                      </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    <!-- TREE -->
+    <record model="ir.ui.view" id="view_student_tenancy_list">
+      <field name="name">Student Tenancy list</field>
+      <field name="model">student.tenancy</field>
+      <field name="arch" type="xml">
+                <tree>
+                    <field name="partner_id" />
+                    <field name="building_id" />
+                    <field name="units_id" />
+                    <field name="room_id" />
+                    <field name="checkin" />
+                    <field name="checkout" />
+                    <field name="termofpayment" />
+                    <field name="boarding_type" />
+                 </tree>
+                 </field>
+    </record>
+    <!-- ACTION-->
+    <record id="action_student_tenancy" model="ir.actions.act_window">
+            <field name="name">Student Tenancy</field>
+            <field name="res_model">student.tenancy</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a Tenancy
+              </p>
+            </field>
+        </record>
+    <!-- END Student Tenancy -->
+    <!-- Student Tenancy With Payment / Payment Tipe B-->
+    <!-- FORM -->
+    <record id="view_student_tenancy_payment_form" model="ir.ui.view">
+            <field name="name">student.tenancy.payment.form</field>
+            <field name="model">student.tenancy</field>
+            <field name="arch" type="xml">
+                <form string="Student Tenancy Payment Form">
+                    <sheet>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="building_id" />
+                            <field name="units_id" />
+                            <field name="room_id" />
+                            <field name="checkin" />
+                            <field name="checkout" />
+                            <field name="termofpayment" />
+                            <field name="boarding_type" />
+                            <field name="boarding_cost" />
+                            <field name="deposit_amount" />
+                        </group>
+                        <field name="payment_ids"  context="{'default_tenancy_id': active_id,'default_room_rate': boarding_cost}" >
+                            <form string="Student Tenancy Payment Form">
+                                <sheet>
+                                    <group>
+                                        <field name='period' />
+                                        <field name='payment_type' />
+                                        <field name='room_rate' />
+                                        <field name="amount"/>
+                                        <field name="discount"/>
+                                        <field name="description"/>
+                                        <field name="total"/>
+                                        <field name="status"/>
+                                        <field name="payment_method"/>
+                                        <field name="invoice_id"/>
+                                    </group>
+                                </sheet>
+                            </form>
+                            <tree decoration-info="status=='paid'" decoration-danger="status=='unpaid' or status=='' or status==None">
+                                    <field name='period' />
+                                    <field name='payment_type' />
+                                    <field name='room_rate' />
+                                    <field name="amount"/>
+                                    <field name="discount"/>
+                                    <field name="description"/>
+                                    <field name="total"/>
+                                    <field name="status"/>
+                                    <field name="payment_method"/>
+                                    <field name="invoice_id"/>
+                            </tree>
+                        </field>
+                                   
+                        <footer>
+                          <div class="o_form_buttons_edit oe_edit_only" role="toolbar" aria-label="Main actions">
+                              <button type="button" class="btn btn-primary o_form_button_save" >
+                                  Save
+                              </button>
+                              <button type="button"
+                                      class="btn btn-secondary o_form_button_cancel" accesskey="j">
+                                  Discard
+                              </button>
+                          </div>
+                      </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    <!-- TREE -->
+    <record model="ir.ui.view" id="view_student_tenancy_payment_list">
+      <field name="name">Student Tenancy Payment list</field>
+      <field name="model">student.tenancy</field>
+      <field name="arch" type="xml">
+                <tree>
+                    <field name="partner_id" />
+                    <field name="building_id" />
+                    <field name="units_id" />
+                    <field name="room_id" />
+                    <field name="checkin" />
+                    <field name="checkout" />
+                    <field name="termofpayment" />
+                    <field name="boarding_type" />
+                 </tree>
+                 </field>
+    </record>
+    
+    <!-- ACTION-->
+    <record id="action_student_tenancy_payment" model="ir.actions.act_window">
+            <field name="name">Student Tenancy Payment 2</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">student.tenancy</field>
+            <field name="view_type">form</field>
+            <field name="view_ids" eval="[(5, 0, 0), 
+                    (0, 0, {'view_mode': 'tree', 'view_id': ref('view_student_tenancy_payment_list')}), 
+                    (0, 0, {'view_mode': 'form', 'view_id': ref('view_student_tenancy_payment_form')})]" />
+            
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a Payment
+              </p>
+            </field>
+        </record>
+    <!-- END Student Tenancy With Payment / Payment Tipe B -->
+
+
+    <!-- Student Payment -->
+    <!-- FORM -->
+    <record id="view_student_payment_form" model="ir.ui.view">
+            <field name="name">student.payment.form</field>
+            <field name="model">student.payment</field>
+            <field name="arch" type="xml">
+                <form string="Student Tenancy Form">
+                    <sheet>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="payment_type" />
+                            <field name="tenancy_id" />
+                            <field name="room_rate" />
+                            <field name="period" />
+                            <field name="amount" />
+                            <field name="discount" />
+                            <field name="total" />
+                            <field name="description" />
+                            <field name="posting_date" />
+                            <field name="payment_method" />
+                            <field name="status" />
+                            <field name="invoice_id"/>
+                        </group>
+                        
+                        <footer>
+                          <div class="o_form_buttons_edit oe_edit_only" role="toolbar" aria-label="Main actions">
+                              <button type="button" class="btn btn-primary o_form_button_save" >
+                                  Save
+                              </button>
+                              <button type="button"
+                                      class="btn btn-secondary o_form_button_cancel" accesskey="j">
+                                  Discard
+                              </button>
+                          </div>
+                      </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    <!-- TREE -->
+    <record model="ir.ui.view" id="view_student_payment_list">
+      <field name="name">Student Payment list</field>
+      <field name="model">student.payment</field>
+      <field name="arch" type="xml">
+                <tree decoration-info="status=='paid'" decoration-danger="status=='unpaid' or status=='' or status==None">
+                    <field name="partner_id"/>
+                    <field name="payment_type" />
+                    <field name="tenancy_id" />
+                     <field name="room_rate" />
+                    <field name="period" />
+                    <field name="amount" />
+                    <field name="discount" />
+                    <field name="total" />
+                    <field name="description" />
+                    <field name="posting_date" />
+                    <field name="payment_method" />
+                    <field name="status" />
+                    <field name="invoice_id"/>
+                 </tree>
+                 </field>
+    </record>
+    <!-- ACTION-->
+    <record id="action_student_payment" model="ir.actions.act_window">
+            <field name="name">Student Payment</field>
+            <field name="res_model">student.payment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a Payment
+              </p>
+            </field>
+        </record>
+    <!-- END Student Tenancy -->
+    <!-- Student Invoice -->
+    <!-- FORM -->
+    <record id="view_student_invoice_form" model="ir.ui.view">
+            <field name="name">student.invoice.form</field>
+            <field name="model">student.invoice</field>
+            <field name="arch" type="xml">
+                <form string="Student Invoice Form">
+                    <sheet>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="payment_type" />
+                            <field name="tenancy_id" />
+                            <!-- Invis start here-->
+                            <field name="order_ids"  options="{'no_create': True}"  attrs="{'invisible': [('payment_type', 'not in', ('tenancy','deposit'))]}" />
+                            <!--
+                             <form string="Student Invoice Form">
+                                    <sheet>
+                                        <group>
+                                            <field name='period' />
+                                            <field name='room_rate' />
+                                        </group>
+                                    </sheet>
+                                </form>
+                                <tree >
+                                    <field name='period' />
+                                    <field name='room_rate' />
+                                </tree>
+                            </field>
+                            -->
+                            <field name="amount"  attrs="{'invisible': [('payment_type', 'not in', ('return','deposit','meal','transport','tenancy'))]}" />
+                            <field name="discount"  attrs="{'invisible': [('payment_type', 'not in', ('return','deposit','meal','transport','tenancy'))]}" />
+                            <field name="total"  attrs="{'invisible': [('payment_type', 'not in', ('return','deposit','meal','transport','tenancy'))]}" />
+                            <field name="description"  attrs="{'invisible': [('payment_type', 'not in', ('return','deposit','meal','transport','tenancy'))]}" />
+                            <field name="posting_date"  attrs="{'invisible': [('payment_type', 'not in', ('return','deposit','meal','transport','tenancy'))]}" />
+                            <field name="payment_method"  attrs="{'invisible': [('payment_type', 'not in', ('return','deposit','meal','transport','tenancy'))]}" />
+                            <field name="status" />
+                        </group>
+                        
+                        <footer>
+                          <div class="o_form_buttons_edit oe_edit_only" role="toolbar" aria-label="Main actions">
+                              <button type="button" class="btn btn-primary o_form_button_save" >
+                                  Save
+                              </button>
+                              <button type="button"
+                                      class="btn btn-secondary o_form_button_cancel" accesskey="j">
+                                  Discard
+                              </button>
+                          </div>
+                      </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    <!-- TREE -->
+    <record model="ir.ui.view" id="view_student_invoice_list">
+      <field name="name">Student Invoice list</field>
+      <field name="model">student.invoice</field>
+      <field name="arch" type="xml">
+        <tree decoration-info="status=='paid'" decoration-danger="status=='unpaid' or status=='' or status==None">
+            <field name="partner_id"/>
+            <field name="payment_type" />
+            <field name="tenancy_id" />
+            <field name="order_ids" />
+            <field name="amount" />
+            <field name="discount" />
+            <field name="total" />
+            <field name="description" />
+            <field name="posting_date" />
+            <field name="payment_method" />
+            <field name="status" />
+            </tree>
+        </field>
+    </record>
+    <!-- ACTION-->
+    <record id="action_student_invoice" model="ir.actions.act_window">
+            <field name="name">Student Invoice</field>
+            <field name="res_model">student.invoice</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a Invoice
+              </p>
+            </field>
+        </record>
+    <!-- END Student Invoice -->
+    <!-- MENU -->
+    <menuitem name="Tenancy" id="student.tenancy_menu_root" action="action_student_tenancy" />
+    <!-- menuitem name="Payment A / List Order" id="student.payment_menu_root" action="action_student_payment" /-->
+    <!-- menuitem name="Payment B" id="student.tenancy_payment_menu_root" action="action_student_tenancy_payment" /-->
+    <menuitem name="Payment / Invoice" id="student.invoice_menu_root" action="action_student_invoice" />
+    <menuitem name="Student" id="student.menu_root" />
+      <menuitem name="Student" id="student.menu_1" parent="student.menu_root" action="contact_list_action" />
+      <menuitem name="Tenancy" id="student.menu_2" parent="student.menu_root" action="action_student_tenancy" />
+      <menuitem name="Payment A" id="student.menu_3" parent="student.menu_root" action="action_student_payment" />
+      <menuitem name="Payment B" id="student.menu_4" parent="student.menu_root" action="action_student_tenancy_payment" />
+  </data>
+</odoo>

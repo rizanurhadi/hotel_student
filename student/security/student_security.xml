@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE xml>
+<odoo noupdate="1">
+
+    <!--Group for student staff user -->
+    <record id="group_student_user" model="res.groups">
+        <field name="name">Student Staff / User Student </field>
+        <field eval="[(4, ref('base.user_root'))]" name="implied_ids" />
+    </record>
+
+    <!--Group for student manager -->
+    <record id="group_student_manager" model="res.groups">
+        <field name="name">Student Data Management / Manager Data Student</field>
+        <field eval="[(4, ref('student.group_student_user'))]" name="implied_ids" />
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+
+</odoo>

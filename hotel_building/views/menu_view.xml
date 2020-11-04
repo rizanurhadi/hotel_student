@@ -1,0 +1,31 @@
+<odoo>
+  <data>
+<!-- Top menu item -->
+    
+    <menuitem name="Hotel Building" id="hotel_building.menu_root" />
+    
+    <!-- menu categories -->
+    
+    <menuitem name="List Building And Assets" id="hotel_building.menu_1" parent="hotel_building.menu_root" />
+   
+    <menuitem name="UNITS" id="hotel_building.menu_2" parent="hotel_building.menu_root"/>
+   
+    <!-- actions -->
+    
+    <menuitem name="Building" id="hotel_building.menu_1_list" parent="hotel_building.menu_1"
+              action="hotel_building.action_window"/>
+    <menuitem name="Assets" id="hotel_building.menu_1_assets" parent="hotel_building.menu_1"
+              action="hotel_building.action_window_assets"/>
+    <menuitem name="Building And Assets" id="hotel_building.menu_1_building_assets" parent="hotel_building.menu_1"
+              action="hotel_building.action_window_building_assets"/>
+    <menuitem name="Room And Assets" id="hotel_building.menu_1_room_assets" parent="hotel_building.menu_1"
+              action="hotel_building.action_window_rooms_assets"/>
+    
+    <menuitem name="Units" id="hotel_building.menu_2_server" parent="hotel_building.menu_2"
+              action="hotel_building.action_window_units"/>
+    
+    <menuitem name="Rooms" id="hotel_building.menu_2_rooms" parent="hotel_building.menu_2"
+              action="hotel_building.action_window_rooms"/>
+    
+  </data>
+</odoo>

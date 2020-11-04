@@ -1,0 +1,78 @@
+<odoo>
+  <data>
+    <!-- UNITS -->
+    <!-- LIST UNITS -->
+    <record model="ir.ui.view" id="hotel_building.units_list">
+      <field name="name">Unit list</field>
+      <field name="model">hotel_building.units</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="unit_no"/>
+          <field name="building_id"/>
+          <field name="location"/>
+          <field name="address"/>
+          <field name="status"/>
+        </tree>
+      </field>
+    </record>
+    <!-- SERVER-->
+    <record model="ir.actions.server" id="hotel_building.action_server_units">
+      <field name="name">hotel_building units</field>
+      <field name="model_id" ref="model_hotel_building_units"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": "hotel_building.units",
+        }
+      </field>
+    </record>
+    <!--FORM-->
+    <record id="view_hotel_units_form" model="ir.ui.view">
+        <field name="name">units.form</field>
+        <field name="model">hotel_building.units</field>
+        <field name="arch" type="xml">
+            <form string="Units">
+                <sheet>
+                    <group >
+                        <field name="building_id" />
+                        <field name="unit_no"/>
+                    </group>
+                    <group>
+                        <field name="location"/>
+                        <field name="address"/>
+                    </group>
+                    <group>
+                      <label for="status" string="Status"/>
+                      <div class="o_row">
+                          <field name="status"/>
+                          <label for="status" string="InActive" attrs="{'invisible': [('status','=',True)]}"/>
+                          <label for="status" string="Active" attrs="{'invisible': [('status','!=',True)]}"/>
+                      </div>
+                    </group>
+                    <footer>
+                        <div class="o_form_buttons_edit oe_edit_only" role="toolbar" aria-label="Main actions">
+                            <button type="button" class="btn btn-primary o_form_button_save" >
+                                Save
+                            </button>
+                            <button type="button"
+                                    class="btn btn-secondary o_form_button_cancel" accesskey="j">
+                                Discard
+                            </button>
+                        </div>
+                    </footer>
+                </sheet>
+                
+            </form>
+        </field>
+    </record>
+    <!-- Action-->
+    <record model="ir.actions.act_window" id="hotel_building.action_window_units">
+      <field name="name">Units </field>
+      <field name="res_model">hotel_building.units</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <!--ENDUNITS-->
+  </data>
+</odoo>

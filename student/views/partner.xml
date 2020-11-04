@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <odoo>
+    <data>
+        <!-- Add instructor field to existing view -->
+        <record model="ir.ui.view" id="partner_instructor_form_view">
+            <field name="name">res.partner.student.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group/group/label" position="replace" >
+                    <label for="street" string="Overseas Home Address"/>
+                </xpath>
+                <field name="title"  position="replace" />
+                <field name="website"  position="replace" >
+                 <field name="website" invisible="1"/>
+                </field>
+                <field name="lang"  position="replace" >
+                 <field name="lang" invisible="1"/>
+                </field>
+                <field name="category_id"  position="replace" />
+
+                <field name="company_type" position="replace" >
+                    <field name="company_type" invisible="1"/>
+                    <field name="student"  context="{'default_student':1}" invisible="1" />
+                     
+                </field>
+                <field name="parent_id" position="replace" >
+                    <field name="parent_id" invisible="1"/>
+                    <field name="chinese_name" placeholder="Chinese Name" /> 
+                </field>
+                <field name="function" position="replace" >
+                    <field name="identification_number" />
+                </field>
+                <field name="vat" position="replace" >
+                    <field name="race" /> 
+                    <field name="religion" />
+                    <field name="gender" />
+                    <field name="birthdate" />
+                    <label for="data_status" string="Status"/>
+                    <div class="o_row">
+                        <field name="data_status"/>
+                        <label for="status" string="InActive" attrs="{'invisible': [('data_status','=',True)]}"/>
+                        <label for="status" string="Active" attrs="{'invisible': [('data_status','!=',True)]}"/>
+                    </div>
+                    
+                </field>
+                <xpath expr="//div[@name='button_box']" position="replace" />
+                <xpath expr="//notebook/page[1]" position="attributes" >
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//notebook/page[2]" position="attributes" >
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//notebook/page[3]" position="attributes" >
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                
+                <notebook position="inside">
+                    <page string="Contact Type">
+                        <group>
+                            <field name="contact_type"/>
+                            <field name="group_type"/>
+                            <field name="contact_remark"/>
+                        </group>
+                    </page>
+                    <page string="Parent Information" autofocus="autofocus">
+                            <field name="child_ids" mode="kanban" context="{'default_parent_id': active_id, 'default_street': street, 'default_street2': street2, 'default_city': city, 'default_state_id': state_id, 'default_zip': zip, 'default_country_id': country_id, 'default_supplier': supplier, 'default_customer': customer, 'default_lang': lang, 'default_user_id': user_id,'default_is_guardian':True}">
+                                <kanban>
+                                    <field name="id"/>
+                                    <field name="color"/>
+                                    <field name="name"/>
+                                    <field name="chinese_name"/>
+                                    <field name="title"/>
+                                    <field name="type"/>
+                                    <field name="email"/>
+                                    <field name="parent_id"/>
+                                    <field name="is_guardian"/>
+                                    <field name="is_company"/>
+                                    <field name="function"/>
+                                    <field name="phone"/>
+                                    <field name="street"/>
+                                    <field name="street2"/>
+                                    <field name="zip"/>
+                                    <field name="city"/>
+                                    <field name="country_id"/>
+                                    <field name="mobile"/>
+                                    <field name="state_id"/>
+                                    <field name="image_small"/>
+                                    <field name="lang"/>
+                                    <!-- fields in form x2many view to diminish requests -->
+                                    <field name="comment"/>
+                                    <field name="customer"/>
+                                    <field name="display_name"/>
+                                    <field name="supplier"/>
+                                    <templates>
+                                        <t t-name="kanban-box">
+                                            <t t-set="color" t-value="kanban_color(record.color.raw_value)"/>
+                                            <div t-att-class="color + (record.title.raw_value == 1 ? ' oe_kanban_color_alert' : '') + ' oe_kanban_global_click'">
+                                                <div class="o_kanban_image">
+                                                    <img alt="" t-if="record.image_small.raw_value" t-att-src="kanban_image('res.partner', 'image_small', record.id.raw_value)"/>
+                                                    <t t-if="!record.image_small.raw_value">
+                                                        <img alt="Delivery" t-if="record.type.raw_value === 'delivery'" t-att-src='_s + "/base/static/img/truck.png"'/>
+                                                        <img alt="Invoice" t-if="record.type.raw_value === 'invoice'" t-att-src='_s + "/base/static/img/money.png"'/>
+                                                        <t t-if="record.type.raw_value !== 'invoice' &amp;&amp; record.type.raw_value !== 'delivery'">
+                                                            <img alt="Logo" t-if="record.is_company.raw_value === true" t-att-src='_s + "/base/static/img/company_image.png"'/>
+                                                            <img alt="Avatar" t-if="record.is_company.raw_value === false" t-att-src='_s + "/base/static/img/avatar.png"'/>
+                                                        </t>
+                                                    </t>
+                                                </div>
+                                                <div class="oe_kanban_details">
+                                                    <field name="name"/>
+                                                    <div t-if="record.function.raw_value"><field name="function"/></div>
+                                                    <div t-if="record.email.raw_value"><field name="email" widget="email"/></div>
+                                                    <div >
+                                                        <div>
+                                                            <field name="zip"/>
+                                                            <field name="city"/>
+                                                        </div>
+                                                        <field t-if="record.state_id.raw_value" name="state_id"/>
+                                                        <field name="country_id"/>
+                                                    </div>
+                                                    <div t-if="record.phone.raw_value">Phone: <field name="phone"/></div>
+                                                    <div t-if="record.mobile.raw_value">Mobile: <field name="mobile"/></div>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </templates>
+                                </kanban>
+                                <form string="Contact / Address">
+                                    <sheet>
+                                        <!-- parent_id and type fields needed in attrs in base_address_city module which overwrites
+                                        _fields_view_get() of partner. It would be better to put those fields there but the web client
+                                        dosen't support when a field is displayed several times in the same view.-->
+                                        <field name="type" required="1" widget="radio" options="{'horizontal': true}"  invisible="1"/>
+                                        <field name="parent_id" invisible="1"/>
+                                        
+                                        <hr/>
+                                        <group>
+                                            <group>
+                                                <field name="student" invisible="1" />
+                                                <field name="is_guardian"  invisible="1" />
+                                                <field name="name" string="Contact Name" attrs="{'required' : [('type', '=', 'contact')]}"/>
+                                                <field name="chinese_name" string="Chinese Name" />
+                                                <field name="title" placeholder="e.g. Father/Mother/Guardian." />
+                                                <field name="function" placeholder="e.g. Sales Director/Owner/" string="Occupation" />
+                                                <field name="email"/>
+                                                <field name="phone" widget="phone"/>
+                                                <field name="mobile" widget="phone"/>
+                                                <field name="office_phone" widget="phone"/>
+                                                <field name="comment" placeholder="internal note..."/>
+                                            </group>
+                                             <group >
+                                                <label for="street" string="Address"/>
+                                                <div>
+                                                    <div class="o_address_format" name="div_address">
+                                                        <field name="street" placeholder="Street..." class="o_address_street"/>
+                                                        <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                                        <field name="city" placeholder="City" class="o_address_city"/>
+                                                        <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True}' context="{'country_id': country_id, 'zip': zip}"/>
+                                                        <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                                        <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
+                                                    </div>
+                                                </div>
+                                            </group>
+                                        </group>
+                                        <field name="supplier" invisible="True"/>
+                                        <field name="customer" invisible="True"/>
+                                        <field name="lang" invisible="True"/>
+                                        <field name="image" invisible="True"/>
+                                        <field name="user_id" invisible="True"/>
+                                    </sheet>
+                                </form>
+                            </field>
+                        </page>
+                    <page string="Education">
+                        <group >
+                            <field name="school_ids"  context="{'default_partner_id': active_id}" >
+                                <form string="Education Form">
+                                    <sheet>
+                                        <group>
+                                            <group>
+                                                <field name="partner_id" invisible="1"/>
+                                                <field name='school_name' />
+                                                <field name="type"/>
+                                                <field name="highest"/>
+                                                <field name="class_number" />
+                                                <field name="form_teacher"/>
+                                                <field name="contact_number" />
+                                                <field name="qualification_type" />
+                                                <field name="honors" />
+                                                <field name="start_date" />
+                                                <field name="end_date" />
+                                                <field name="remarks" />
+                                            </group>
+                                        </group>
+                                    </sheet>
+                                            
+                                </form>
+                                <tree >
+                                    <field name="school_name"/>
+                                    <field name="type"/>
+                                    <field name="highest"/>
+                                    <field name="class_number" />
+                                    <field name="form_teacher"/>
+                                    <field name="contact_number" />
+                                    <field name="qualification_type" />
+                                    <field name="honors" />
+                                    <field name="start_date" />
+                                    <field name="end_date" />
+                                    <field name="remarks" />
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                    <page string="Validaty Information">
+                        <group >
+                            <field name="valid_ids"  context="{'default_partner_id': active_id}" >
+                                <form string="Student Validity Form">
+                                    <sheet>
+                                        <group>
+                                            <group>
+                                                <field name="partner_id" invisible="1"/>
+                                                <field name='validation_type' />
+                                                <field name="validation_number"/>
+                                                <field name="approval"/>
+                                                <field name="valid_from" />
+                                                <field name="valid_to"/>
+                                                <field name="remarks" />
+                                            </group>
+                                        </group>
+                                    </sheet>
+                                            
+                                </form>
+                                <tree >
+                                   <field name='validation_type' />
+                                                <field name="validation_number"/>
+                                                <field name="approval"/>
+                                                <field name="valid_from" />
+                                                <field name="valid_to"/>
+                                                <field name="remarks" />
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                    <page string="Payment History">
+                    <group >
+                            <field name="payment_ids"  context="{'default_partner_id': active_id}" >
+                                <tree decoration-info="status=='paid'" decoration-danger="status=='unpaid' or status=='' or status==None" >
+                                   <field name='period' />
+                                                <field name='period' />
+                                                <field name='tenancy_id' />
+                                                <field name='boarding_type' />
+                                                <field name="amount"/>
+                                                <field name="discount"/>
+                                                <field name="description"/>
+                                                <field name="total"/>
+                                                <field name="status"/>
+                                                <field name="invoice_id"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </notebook>
+                
+                <xpath expr="//notebook" position="after">
+                    <footer>
+                        <div class="o_form_buttons_edit oe_edit_only" role="toolbar" aria-label="Main actions">
+                            <button type="button" class="btn btn-primary o_form_button_save" >
+                                Save
+                            </button>
+                            <button type="button"
+                                    class="btn btn-secondary o_form_button_cancel" accesskey="j">
+                                Discard
+                            </button>
+                        </div>
+                    </footer>
+                </xpath>
+            </field>
+            
+        </record>
+
+        <record model="ir.actions.act_window" id="contact_list_action">
+            <field name="name">Students</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="context">{"search_default_student":1,"default_student":1}</field>
+        </record>
+
+        <record id="base_view_res_partner_filter" model="ir.ui.view">
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter"/>
+            <field name="arch" type="xml">
+                <search>
+                    <filter string="Student" name="student" domain="[('student', '=', True)]"/>
+                    <filter string="Parent/Guardian" name="is_guardian" domain="[('is_guardian', '=',True)]"/>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

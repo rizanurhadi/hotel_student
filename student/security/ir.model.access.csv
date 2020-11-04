@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_student_student,student.student,model_student_student,student.group_student_manager,1,1,1,1
+access_student_school,student.school,model_student_school,student.group_student_manager,1,1,1,1
+access_student_student_schools,student.student.schools,model_student_student_schools,student.group_student_manager,1,1,1,1
+access_student_validation,student.validation,model_student_validation,student.group_student_manager,1,1,1,1
+access_student_payment,student.payment,model_student_payment,student.group_student_manager,1,1,1,1
+access_student_tenancy,student.tenancy,model_student_tenancy,student.group_student_manager,1,1,1,1
+access_student_invoice,student.invoice,model_student_invoice,student.group_student_manager,1,1,1,1
+access_student_res_partner_guardian,student.res.partner.guardian,model_res_partner_guardian,student.group_student_manager,1,1,1,1

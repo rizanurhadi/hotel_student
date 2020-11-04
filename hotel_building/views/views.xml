@@ -1,0 +1,295 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="hotel_building.list">
+      <field name="name">hotel_building list</field>
+      <field name="model">hotel_building.hotel_building</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="code"/>
+          <field name="name"/>
+          <field name="location"/>
+          <field name="status"/>
+        </tree>
+      </field>
+    </record>
+    <!-- FORM VIEW HOTEL BUILDING -->
+    <record id="view_hotel_building_form" model="ir.ui.view">
+        <field name="name">hotel_building.form</field>
+        <field name="model">hotel_building.hotel_building</field>
+        <field name="arch" type="xml">
+            <form string=" Hotel Building">
+                <sheet>
+                    <group>
+                        <field name="code"/>
+                        <field name="name"/>
+                    </group>
+                    <group>
+                        <field name="location"/>
+                        <field name="address"/>
+                    </group>
+                    <group>
+                    <label for="status" string="Status"/>
+                    <div class="o_row">
+                        <field name="status"/>
+                        <label for="status" string="InActive" attrs="{'invisible': [('status','=',True)]}"/>
+                        <label for="status" string="Active" attrs="{'invisible': [('status','!=',True)]}"/>
+                    </div>
+                    </group>
+                   <footer>
+                        <div class="o_form_buttons_edit oe_edit_only" role="toolbar" aria-label="Main actions">
+                            <button type="button" class="btn btn-primary o_form_button_save" >
+                                Save
+                            </button>
+                            <button type="button"
+                                    class="btn btn-secondary o_form_button_cancel" accesskey="j">
+                                Discard
+                            </button>
+                        </div>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    
+    <record model="ir.actions.act_window" id="hotel_building.action_window">
+      <field name="name">Building </field>
+      <field name="res_model">hotel_building.hotel_building</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+
+    <!-- server action to the one above -->
+    
+    <record model="ir.actions.server" id="hotel_building.action_server">
+      <field name="name">hotel_building server</field>
+      <field name="model_id" ref="model_hotel_building_hotel_building"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": "hotel_building.hotel_building",
+        }
+      </field>
+    </record>
+    
+
+    <!-- ROOMS -->
+    <!-- LIST ROOMS -->
+    <record model="ir.ui.view" id="hotel_building.rooms">
+      <field name="name">Room list</field>
+      <field name="model">hotel_building.rooms</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="units_id"/>
+          <field name="name"/>
+          <field name="rate"/>
+          <field name="vacant"/>
+          <field name="status"/>
+        </tree>
+      </field>
+    </record>
+    <!--FORM-->
+    <record id="view_hotel_rooms_form" model="ir.ui.view">
+        <field name="name">rooms.form</field>
+        <field name="model">hotel_building.rooms</field>
+        <field name="arch" type="xml">
+            <form string="Units">
+                <sheet>
+                    <group>
+                        <field name="units_id" />
+                        <field name="name"/>
+                        <field name="rate"/>
+                    </group>
+                    <group>
+                        <field name="vacant"/>
+                        <field name="description"/>
+                    </group>
+                    <group>
+                    <label for="status" string="Status"/>
+                    <div class="o_row">
+                        <field name="status"/>
+                        <label for="status" string="InActive" attrs="{'invisible': [('status','=',True)]}"/>
+                        <label for="status" string="Active" attrs="{'invisible': [('status','!=',True)]}"/>
+                    </div>
+                    </group>
+                    <footer>
+                        <div class="o_form_buttons_edit oe_edit_only" role="toolbar" aria-label="Main actions">
+                            <button type="button" class="btn btn-primary o_form_button_save" >
+                                Save
+                            </button>
+                            <button type="button"
+                                    class="btn btn-secondary o_form_button_cancel" accesskey="j">
+                                Discard
+                            </button>
+                        </div>
+                    </footer>
+                </sheet>
+                
+            </form>
+        </field>
+    </record>
+    <!-- Action-->
+    <record model="ir.actions.act_window" id="hotel_building.action_window_rooms">
+      <field name="name">Rooms</field>
+      <field name="res_model">hotel_building.rooms</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <!-- END ROOMS -->
+
+    <!-- Assets -->
+    <!-- LIST Assets -->
+    <record model="ir.ui.view" id="hotel_building.assets">
+      <field name="name">Assets list</field>
+      <field name="model">hotel_building.assets</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="description"/>
+        </tree>
+      </field>
+    </record>
+    <!--FORM-->
+    <record id="view_hotel_assets_form" model="ir.ui.view">
+        <field name="name">assets.form</field>
+        <field name="model">hotel_building.assets</field>
+        <field name="arch" type="xml">
+            <form string="Units">
+                <sheet>
+                    <group >
+                        <field name="name"/>
+                        <field name="description"/>
+                    </group>
+                    <footer>
+                        <div class="o_form_buttons_edit oe_edit_only" role="toolbar" aria-label="Main actions">
+                            <button type="button" class="btn btn-primary o_form_button_save" >
+                                Save
+                            </button>
+                            <button type="button"
+                                    class="btn btn-secondary o_form_button_cancel" accesskey="j">
+                                Discard
+                            </button>
+                        </div>
+                    </footer>
+                </sheet>
+                
+            </form>
+        </field>
+    </record>
+    <!-- Action-->
+    <record model="ir.actions.act_window" id="hotel_building.action_window_assets">
+      <field name="name">Assets</field>
+      <field name="res_model">hotel_building.assets</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <!-- END ASSETS-->
+
+    <!-- Building Assets -->
+    <!-- LIST Building Assets -->
+    <record model="ir.ui.view" id="hotel_building_building_assets_view">
+      <field name="name">Building Assets list</field>
+      <field name="model">hotel_building.building.assets</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="building_id"/>
+          <field name="asset_id"/>
+          <field name="qty"/>
+        </tree>
+      </field>
+    </record>
+    <!--FORM-->
+    <record id="view_hotel_building_assets_form" model="ir.ui.view">
+        <field name="name">building.assets.form</field>
+        <field name="model">hotel_building.building.assets</field>
+        <field name="arch" type="xml">
+            <form string="Units">
+                <sheet>
+                    <group>
+                        <field name="building_id"/>
+                        <field name="asset_id"/>
+                        <field name="qty"/>
+                    </group>
+                     <footer>
+                        <div class="o_form_buttons_edit oe_edit_only" role="toolbar" aria-label="Main actions">
+                            <button type="button" class="btn btn-primary o_form_button_save" >
+                                Save
+                            </button>
+                            <button type="button"
+                                    class="btn btn-secondary o_form_button_cancel" accesskey="j">
+                                Discard
+                            </button>
+                        </div>
+                    </footer>
+                </sheet>
+               
+            </form>
+        </field>
+    </record>
+    <!-- Action-->
+    <record model="ir.actions.act_window" id="hotel_building.action_window_building_assets">
+      <field name="name">Building And Assets</field>
+      <field name="res_model">hotel_building.building.assets</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <!-- END ASSETS-->
+    <!-- END Building ASSETS-->
+    
+
+    <!-- Room Assets -->
+    <!-- LIST Room Assets -->
+    <record model="ir.ui.view" id="hotel_building_room_assets_view">
+      <field name="name">Rooms Assets list</field>
+      <field name="model">hotel_building.rooms.assets</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="building_asset_id"/>
+          <field name="qty_total_asset"/>
+          <field name="room_id"/>
+          <field name="qty"/>
+        </tree>
+      </field>
+    </record>
+    <!--FORM-->
+    <record id="view_hotel_building_room_assets_form" model="ir.ui.view">
+        <field name="name">building.assets.form</field>
+        <field name="model">hotel_building.rooms.assets</field>
+        <field name="arch" type="xml">
+            <form string="Units">
+                <sheet>
+                    <group >
+                        <field name="building_asset_id"/>
+                        <field name="room_id"/>
+                        <field name="qty"/>
+                    </group>
+                    <!--group class="oe_edit_only">
+                      
+                        <input type="checkbox" name="hitung" value="hitung"/>
+                    </group-->
+                    <footer>
+                        <div class="o_form_buttons_edit oe_edit_only" role="toolbar" aria-label="Main actions">
+                            <button type="button" class="btn btn-primary o_form_button_save" >
+                                Save
+                            </button>
+                            <button type="button"
+                                    class="btn btn-secondary o_form_button_cancel" accesskey="j">
+                                Discard
+                            </button>
+                        </div>
+                    </footer>
+                </sheet>
+                
+            </form>
+        </field>
+    </record>
+    <!-- Action-->
+    <record model="ir.actions.act_window" id="hotel_building.action_window_rooms_assets">
+      <field name="name">Rooms And Assets</field>
+      <field name="res_model">hotel_building.rooms.assets</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <!-- END Room ASSETS-->
+  </data>
+</odoo>
